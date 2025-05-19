@@ -989,224 +989,340 @@
 	
 	<!-- section testimonials -->
 	<section id="skills">
+  <style>
+    .client-item {
+      position: relative;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 30px;
+    }
+
+    .client-item .inner {
+      position: relative;
+      padding: 10px;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+    }
+
+    .client-item:hover .inner {
+      transform: scale(1.05);
+    }
+
+    .client-item .skill-name {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .client-item:hover .skill-name {
+      opacity: 1;
+    }
+
+    .skill-category-title {
+      width: 100%;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 40px 0 20px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+  </style>
+
   <div class="container">
-    <h2 class="section-title wow fadeInUp">List of skill</h2>
+    <h2 class="section-title wow fadeInUp">List of Skills</h2>
     <div class="row">
 
-      <!-- Existing skills -->
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="golang" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
+      <!-- Backend -->
+      <div class="col-12 skill-category-title">Backend</div>
 
+      <!-- PHP -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="php" style="width: 50%;" />
+            <div class="skill-name">PHP</div>
           </div>
         </div>
       </div>
 
+      <!-- Golang -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="golang" style="width: 50%;" />
+            <div class="skill-name">Golang</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Laravel -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original-wordmark.svg" alt="laravel" style="width: 50%;" />
+            <div class="skill-name">Laravel</div>
           </div>
         </div>
       </div>
 
+      <!-- CodeIgniter -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/codeigniter/codeigniter-plain-wordmark.svg" alt="codeigniter" style="width: 50%;" />
+            <div class="skill-name">CodeIgniter</div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="vuejs" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="react" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="flutter" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg" alt="bootstrap" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://materializecss.com/res/materialize.svg" alt="materializecss" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jquery" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="javascript" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="mysql" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="microsoft-sql-server" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="mongodb" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="linux" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Additional skills -->
+      <!-- Express -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="express" style="width: 50%;" />
+            <div class="skill-name">Express.js</div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="nodejs" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-md-3 col-6">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="react-native" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
+      <!-- ASP.NET -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" alt="aspnet" style="width: 50%;" />
+            <div class="skill-name">ASP.NET</div>
           </div>
         </div>
       </div>
 
+      <!-- Frontend -->
+      <div class="col-12 skill-category-title">Frontend</div>
+
+      <!-- Vue.js -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
-            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg" alt="tailwindcss" style="width: 50%;" />
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="vuejs" style="width: 50%;" />
+            <div class="skill-name">Vue.js</div>
           </div>
         </div>
       </div>
 
+      <!-- Nuxt.js -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nuxtjs/nuxtjs-original-wordmark.svg" alt="nuxtjs" style="width: 50%;" />
+            <div class="skill-name">Nuxt.js</div>
           </div>
         </div>
       </div>
-      
+
+      <!-- React -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="react" style="width: 50%;" />
+            <div class="skill-name">React.js</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TailwindCSS -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/tailwindcss.svg" alt="tailwindcss" style="width: 50%;" />
+            <div class="skill-name">Tailwind CSS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bootstrap -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg" alt="bootstrap" style="width: 50%;" />
+            <div class="skill-name">Bootstrap</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MaterializeCSS -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://materializecss.com/res/materialize.svg" alt="materializecss" style="width: 50%;" />
+            <div class="skill-name">Materialize CSS</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- jQuery -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" alt="jquery" style="width: 50%;" />
+            <div class="skill-name">jQuery</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="javascript" style="width: 50%;" />
+            <div class="skill-name">JavaScript</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="col-12 skill-category-title">Mobile</div>
+
+      <!-- React Native -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="react-native" style="width: 50%;" />
+            <div class="skill-name">React Native</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flutter -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="flutter" style="width: 50%;" />
+            <div class="skill-name">Flutter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Database -->
+      <div class="col-12 skill-category-title">Database</div>
+
+      <!-- MySQL -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="mysql" style="width: 50%;" />
+            <div class="skill-name">MySQL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SQL Server -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="microsoft-sql-server" style="width: 50%;" />
+            <div class="skill-name">SQL Server</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MongoDB -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="mongodb" style="width: 50%;" />
+            <div class="skill-name">MongoDB</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Knex.js -->
       <div class="col-md-3 col-6">
         <div class="client-item">
           <div class="inner">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/knexjs/knexjs-original-wordmark.svg" alt="knexjs" style="width: 50%;" />
+            <div class="skill-name">Knex.js</div>
           </div>
         </div>
       </div>
 
+      <!-- Tools -->
+      <div class="col-12 skill-category-title">Tools & Others</div>
+
+      <!-- Node.js -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="nodejs" style="width: 50%;" />
+            <div class="skill-name">Node.js</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Docker -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker" style="width: 50%;" />
+            <div class="skill-name">Docker</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linux -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="linux" style="width: 50%;" />
+            <div class="skill-name">Linux</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swagger -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original.svg" alt="swagger" style="width: 50%;" />
+            <div class="skill-name">Swagger</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REST API -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner" style="font-size: 20px; font-weight: bold; color: #333; padding-top: 25px;">
+            REST API
+            <div class="skill-name">REST API</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SQL -->
+      <div class="col-md-3 col-6">
+        <div class="client-item">
+          <div class="inner" style="font-size: 20px; font-weight: bold; color: #00758F; padding-top: 25px;">
+            SQL
+            <div class="skill-name">SQL</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zod -->
       <div class="col-md-3 col-6" title="Zod validation library">
         <div class="client-item">
           <div class="inner">
             <img src="https://raw.githubusercontent.com/colinhacks/zod/main/logo.svg" alt="zod" style="width: 50%;" />
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6" title="SQL">
-        <div class="client-item">
-          <div class="inner" style="font-size: 24px; font-weight: bold; color: #00758F; text-align: center; padding-top: 25px;">
-            SQL
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6" title="REST API">
-        <div class="client-item">
-          <div class="inner" style="font-size: 20px; font-weight: bold; color: #333; text-align: center; padding-top: 30px;">
-            REST API
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3 col-6" title="Swagger">
-        <div class="client-item">
-          <div class="inner">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original.svg" alt="swagger" style="width: 50%;" />
+            <div class="skill-name">Zod</div>
           </div>
         </div>
       </div>
