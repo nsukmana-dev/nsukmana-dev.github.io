@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard SMAN 1 Pebayuran</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(101, 78, 163, 0.8), rgba(234, 175, 200, 0.8)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .welcome {
+            font-size: 28px;
+            font-weight: 300;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, var(--card-color), var(--card-color-dark));
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .dashboard-card:hover::before {
+            transform: scale(2);
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+            line-height: 1.4;
+        }
+
+        .card-detail {
+            font-size: 12px;
+            margin-top: 10px;
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Card Colors */
+        .card-profile {
+            --card-color: #17a2b8;
+            --card-color-dark: #138496;
+        }
+
+        .card-guru {
+            --card-color: #6f42c1;
+            --card-color-dark: #5a2d91;
+        }
+
+        .card-study {
+            --card-color: #3f51b5;
+            --card-color-dark: #2c387e;
+        }
+
+        .card-mapel {
+            --card-color: #28a745;
+            --card-color-dark: #1e7e34;
+        }
+
+        .card-siswa {
+            --card-color: #6c757d;
+            --card-color-dark: #495057;
+        }
+
+        .card-kenaikan {
+            --card-color: #dc3545;
+            --card-color-dark: #c82333;
+        }
+
+        .card-wali {
+            --card-color: #17a2b8;
+            --card-color-dark: #138496;
+        }
+
+        .card-kelas {
+            --card-color: #dc3545;
+            --card-color-dark: #c82333;
+        }
+
+        .card-nilai {
+            --card-color: #6f42c1;
+            --card-color-dark: #5a2d91;
+        }
+
+        .card-profil {
+            --card-color: #28a745;
+            --card-color-dark: #1e7e34;
+        }
+
+        .card-kontak {
+            --card-color: #fd7e14;
+            --card-color-dark: #e55a00;
+        }
+
+        /* Large card for profile */
+        .card-large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .card-medium {
+            grid-row: span 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+            }
+            
+            .card-large {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+            
+            .dashboard-card {
+                padding: 20px;
+                min-height: 120px;
+            }
+            
+            .card-icon {
+                font-size: 36px;
+            }
+            
+            .card-title {
+                font-size: 16px;
+            }
+            
+            .welcome {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-large {
+                grid-column: span 1;
+            }
+        }
+
+        /* Edit Mode Styles */
+        .edit-mode {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .edit-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .edit-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .editing .dashboard-card {
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .editing .dashboard-card:hover {
+            border-color: #007bff;
+            cursor: move;
+        }
+
+        .drag-over {
+            border-color: #28a745 !important;
+            background: rgba(40, 167, 69, 0.1) !important;
+        }
+
+        /* Size control buttons */
+        .size-controls {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            z-index: 10;
+        }
+
+        .editing .dashboard-card:hover .size-controls {
+            display: flex;
+        }
+
+        .size-btn {
+            background: rgba(0, 123, 255, 0.9);
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .size-btn:hover {
+            background: rgba(0, 86, 179, 0.9);
+            transform: scale(1.1);
+        }
+
+        .size-btn.active {
+            background: rgba(40, 167, 69, 0.9);
+        }
+
+        /* Card size variants */
+        .card-small {
+            grid-column: span 1;
+            grid-row: span 1;
+            min-height: 120px;
+        }
+
+        .card-medium {
+            grid-column: span 1;
+            grid-row: span 1;
+            min-height: 150px;
+        }
+
+        .card-large {
+            grid-column: span 2;
+            grid-row: span 1;
+            min-height: 150px;
+        }
+
+        .card-extra-large {
+            grid-column: span 2;
+            grid-row: span 2;
+            min-height: 200px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-large, .card-extra-large {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-large, .card-extra-large {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        /* Edit instructions */
+        .edit-instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            display: none;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        .editing .edit-instructions {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="welcome">Selamat Datang</h1>
+        <button class="logout-btn" onclick="logout()">Logout 🔓</button>
+    </div>
+
+    <div class="edit-mode">
+        <button class="edit-btn" onclick="toggleEditMode()">✏️ Edit Layout</button>
+    </div>
+
+    <div class="dashboard-grid" id="dashboardGrid">
+        <!-- Profile Card (Extra Large) -->
+        <div class="dashboard-card card-profile card-extra-large" draggable="false" data-id="profile" data-size="extra-large">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn active" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">👤</div>
+            <div>
+                <div class="card-title">Nandar Sukmana</div>
+                <div class="card-subtitle">Area Login Sekolah Kurikulum</div>
+            </div>
+        </div>
+
+        <!-- Guru Card -->
+        <div class="dashboard-card card-guru card-medium" draggable="false" data-id="guru" data-size="medium">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn active" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">🎓</div>
+            <div>
+                <div class="card-title">Input Guru</div>
+                <div class="card-subtitle">Input, edit, dan delete guru beserta label guru...</div>
+                <div class="card-detail">Klik Disini...</div>
+            </div>
+        </div>
+
+        <!-- Study Card -->
+        <div class="dashboard-card card-study card-medium" draggable="false" data-id="study" data-size="medium">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn active" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">📚</div>
+            <div>
+                <div class="card-title">Bidang Study</div>
+                <div class="card-detail">Klik Disini...</div>
+            </div>
+        </div>
+
+        <!-- Mapel Card -->
+        <div class="dashboard-card card-mapel card-medium" draggable="false" data-id="mapel" data-size="medium">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn active" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">💰</div>
+            <div>
+                <div class="card-title">Input Mapel</div>
+            </div>
+        </div>
+
+        <!-- Siswa Card (Large) -->
+        <div class="dashboard-card card-siswa card-large" draggable="false" data-id="siswa" data-size="large">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn active" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">👥</div>
+            <div>
+                <div class="card-title">Siswa</div>
+                <div class="card-subtitle">Input, Edit & Delete Beserta Table Siswa</div>
+                <div class="card-detail">Klik Disini...</div>
+            </div>
+        </div>
+
+        <!-- Kenaikan Card -->
+        <div class="dashboard-card card-kenaikan card-medium" draggable="false" data-id="kenaikan" data-size="medium">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn active" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">🚀</div>
+            <div>
+                <div class="card-title">Kenaikan Kelas</div>
+                <div class="card-subtitle">Kenaikan kelas, semester dan lulus beserta ringkian kelas...</div>
+                <div class="card-detail">Klik Disini...</div>
+            </div>
+        </div>
+
+        <!-- Wali Kelas Card -->
+        <div class="dashboard-card card-wali card-small" draggable="false" data-id="wali" data-size="small">
+            <div class="size-controls">
+                <button class="size-btn active" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">👨‍🏫</div>
+            <div>
+                <div class="card-title">Wali Kelas</div>
+            </div>
+        </div>
+
+        <!-- Kelas Card -->
+        <div class="dashboard-card card-kelas card-small" draggable="false" data-id="kelas" data-size="small">
+            <div class="size-controls">
+                <button class="size-btn active" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">🎯</div>
+            <div>
+                <div class="card-title">Kelas</div>
+            </div>
+        </div>
+
+        <!-- Nilai Card -->
+        <div class="dashboard-card card-nilai card-small" draggable="false" data-id="nilai" data-size="small">
+            <div class="size-controls">
+                <button class="size-btn active" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">🅰️</div>
+            <div>
+                <div class="card-title">Nilai KKM</div>
+            </div>
+        </div>
+
+        <!-- Profil Card -->
+        <div class="dashboard-card card-profil card-small" draggable="false" data-id="profil" data-size="small">
+            <div class="size-controls">
+                <button class="size-btn active" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">👤</div>
+            <div>
+                <div class="card-title">Profil</div>
+            </div>
+        </div>
+
+        <!-- Kontak Card -->
+        <div class="dashboard-card card-kontak card-large" draggable="false" data-id="kontak" data-size="large">
+            <div class="size-controls">
+                <button class="size-btn" data-size="small" title="Small">S</button>
+                <button class="size-btn" data-size="medium" title="Medium">M</button>
+                <button class="size-btn active" data-size="large" title="Large">L</button>
+                <button class="size-btn" data-size="extra-large" title="Extra Large">XL</button>
+            </div>
+            <div class="card-icon">📞</div>
+            <div>
+                <div class="card-title">Kontak</div>
+                <div class="card-subtitle">085772397352<br>
+                info@sman1pebayuran.sch.id<br>
+                17710<br>
+                Jl. Pebayuran - Bekasi</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Instructions -->
+    <div class="edit-instructions">
+        💡 <strong>Edit Mode:</strong> Drag kartu untuk mengubah posisi | Hover kartu dan klik S/M/L/XL untuk mengubah ukuran
+    </div>
+
+    <script>
+        let isEditMode = false;
+        let draggedElement = null;
+        let layout = [];
+
+        // Initialize layout on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLayout();
+            initializeDragAndDrop();
+            initializeSizeControls();
+        });
+
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const body = document.body;
+            const btn = document.querySelector('.edit-btn');
+            const cards = document.querySelectorAll('.dashboard-card');
+            
+            if (isEditMode) {
+                body.classList.add('editing');
+                btn.textContent = '✅ Save Layout';
+                btn.style.background = '#28a745';
+                cards.forEach(card => {
+                    card.draggable = true;
+                });
+                showEditInstructions();
+            } else {
+                body.classList.remove('editing');
+                btn.textContent = '✏️ Edit Layout';
+                btn.style.background = '#007bff';
+                cards.forEach(card => {
+                    card.draggable = false;
+                });
+                saveLayout();
+                hideEditInstructions();
+            }
+        }
+
+        function initializeDragAndDrop() {
+            const cards = document.querySelectorAll('.dashboard-card');
+            const grid = document.getElementById('dashboardGrid');
+
+            cards.forEach(card => {
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragend', handleDragEnd);
+            });
+
+            grid.addEventListener('dragover', handleDragOver);
+            grid.addEventListener('drop', handleDrop);
+        }
+
+        function handleDragStart(e) {
+            if (!isEditMode) return;
+            draggedElement = this;
+            this.style.opacity = '0.5';
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+            draggedElement = null;
+        }
+
+        function handleDragOver(e) {
+            if (!isEditMode) return;
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            
+            const afterElement = getDragAfterElement(e.clientY);
+            const grid = document.getElementById('dashboardGrid');
+            
+            if (afterElement == null) {
+                grid.appendChild(draggedElement);
+            } else {
+                grid.insertBefore(draggedElement, afterElement);
+            }
+        }
+
+        function handleDrop(e) {
+            if (!isEditMode) return;
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function getDragAfterElement(y) {
+            const draggableElements = [...document.querySelectorAll('.dashboard-card:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        function initializeSizeControls() {
+            const sizeButtons = document.querySelectorAll('.size-btn');
+            sizeButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (!isEditMode) return;
+                    
+                    const card = this.closest('.dashboard-card');
+                    const newSize = this.dataset.size;
+                    const oldSize = card.dataset.size;
+                    
+                    // Remove old size class and add new one
+                    card.classList.remove(`card-${oldSize}`);
+                    card.classList.add(`card-${newSize}`);
+                    card.dataset.size = newSize;
+                    
+                    // Update active button
+                    const sizeControls = card.querySelector('.size-controls');
+                    sizeControls.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show feedback
+                    const sizeNames = {
+                        'small': 'Kecil',
+                        'medium': 'Sedang', 
+                        'large': 'Besar',
+                        'extra-large': 'Sangat Besar'
+                    };
+                    showNotification(`Ukuran kartu diubah ke ${sizeNames[newSize]}`, 'info', 1500);
+                });
+            });
+        }
+
+        function saveLayout() {
+            const cards = document.querySelectorAll('.dashboard-card');
+            layout = Array.from(cards).map(card => ({
+                id: card.dataset.id,
+                size: card.dataset.size
+            }));
+            localStorage.setItem('dashboardLayout', JSON.stringify(layout));
+            
+            // Show success message
+            showNotification('Layout dan ukuran berhasil disimpan!', 'success');
+        }
+
+        function loadLayout() {
+            const savedLayout = localStorage.getItem('dashboardLayout');
+            if (savedLayout) {
+                layout = JSON.parse(savedLayout);
+                const grid = document.getElementById('dashboardGrid');
+                const cards = document.querySelectorAll('.dashboard-card');
+                
+                // Convert cards to map for easy lookup
+                const cardMap = {};
+                cards.forEach(card => {
+                    cardMap[card.dataset.id] = card;
+                });
+                
+                // Apply saved layout and sizes
+                layout.forEach(cardData => {
+                    // Handle both old format (just ID) and new format (ID + size)
+                    const cardId = typeof cardData === 'string' ? cardData : cardData.id;
+                    const cardSize = typeof cardData === 'object' ? cardData.size : null;
+                    
+                    if (cardMap[cardId]) {
+                        const card = cardMap[cardId];
+                        grid.appendChild(card);
+                        
+                        // Apply saved size if available
+                        if (cardSize) {
+                            // Remove current size class
+                            const currentSize = card.dataset.size;
+                            if (currentSize) {
+                                card.classList.remove(`card-${currentSize}`);
+                            }
+                            
+                            // Add new size class
+                            card.classList.add(`card-${cardSize}`);
+                            card.dataset.size = cardSize;
+                            
+                            // Update active size button
+                            const sizeControls = card.querySelector('.size-controls');
+                            if (sizeControls) {
+                                sizeControls.querySelectorAll('.size-btn').forEach(btn => {
+                                    btn.classList.toggle('active', btn.dataset.size === cardSize);
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        function showEditInstructions() {
+            showNotification('Mode edit aktif! Drag kartu untuk pindah posisi | Hover dan klik S/M/L/XL untuk ubah ukuran', 'info', 5000);
+        }
+
+        function hideEditInstructions() {
+            // Instructions will hide automatically
+        }
+
+        function showNotification(message, type = 'info', duration = 3000) {
+            // Remove existing notifications
+            const existing = document.querySelector('.notification');
+            if (existing) {
+                existing.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 1001;
+                font-weight: 500;
+                max-width: 300px;
+                word-wrap: break-word;
+                animation: slideInRight 0.3s ease;
+            `;
+
+            // Add slide animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => {
+                    notification.remove();
+                    style.remove();
+                }, 300);
+            }, duration);
+        }
+
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                showNotification('Logout berhasil!', 'success');
+                setTimeout(() => {
+                    // Redirect to login page or reload
+                    window.location.reload();
+                }, 1500);
+            }
+        }
+
+        // Add click functionality for cards
+        document.querySelectorAll('.dashboard-card').forEach(card => {
+            card.addEventListener('click', function() {
+                if (!isEditMode) {
+                    const cardTitle = this.querySelector('.card-title').textContent;
+                    showNotification(`Membuka ${cardTitle}...`, 'info', 2000);
+                    
+                    // Add your navigation logic here
+                    console.log(`Navigating to: ${cardTitle}`);
+                }
+            });
+        });
+
+        // Add hover effects
+        document.querySelectorAll('.dashboard-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (!isEditMode) {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                if (!isEditMode) {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
